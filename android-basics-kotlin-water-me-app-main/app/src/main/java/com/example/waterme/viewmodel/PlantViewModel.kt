@@ -32,9 +32,22 @@ class PlantViewModel(application: Application): ViewModel() {
         plantName: String
     ) {
         // TODO: create a Data instance with the plantName passed to it
+        WorkManager.getInstance(myContext)
+       // Candidates to run in parallel
+       .beginWith(listOf(plantName1, plantName2, plantName3))
+       // Dependent work (only runs after all previous work in chain)
+       .then(cache)
+       .then(upload)
+       // Call enqueue to kick things off
+       .enqueue()
+       
+val cache: OneTimeWorkRequest = OneTimeWorkRequestBuilder<PlantWorker>()
+   .setInputMerger(ArrayCreatingInputMerger::class)
+   .setConstraints(constraints)
+   .build()
 
-        // TODO: Generate a OneTimeWorkRequest with the passed in duration, time unit, and data
-        //  instance
+
+        // TODO: Generate a OneTimeWorkRequest with the passed in duration, time unit, and data instance
 
         // TODO: Enqueue the request as a unique work request
     }
