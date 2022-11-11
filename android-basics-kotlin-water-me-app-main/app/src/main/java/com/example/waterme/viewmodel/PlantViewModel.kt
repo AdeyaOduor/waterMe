@@ -32,10 +32,15 @@ class PlantViewModel(application: Application): ViewModel() {
         plantName: String
     ) {
         // TODO: create a Data instance with the plantName passed to it
-        WorkManager.getInstance(myContext)
-       // Candidates to run in parallel
-       .beginWith(listOf(plantName1, plantName2, plantName3))
-       // Dependent work (only runs after all previous work in chain)
+        private val workManager = WorkManager.getInstance(application)
+        
+        internal fun plantName(waterPlant: Int) 
+        {
+            workManager.enqueue(OneTimeWorkRequest.from(waterPlant::class.java))
+        }
+
+
+     
        .then(cache)
        .then(upload)
        // Call enqueue to kick things off
