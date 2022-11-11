@@ -32,25 +32,6 @@ class PlantViewModel(application: Application): ViewModel() {
         plantName: String
     ) {
         // TODO: create a Data instance with the plantName passed to it
-        private val workManager = WorkManager.getInstance(application)
-        
-        internal fun plantName(waterPlant: Int) 
-        {
-            workManager.enqueue(OneTimeWorkRequest.from(waterPlant::class.java))
-        }
-
-
-     
-       .then(cache)
-       .then(upload)
-       // Call enqueue to kick things off
-       .enqueue()
-       
-val cache: OneTimeWorkRequest = OneTimeWorkRequestBuilder<PlantWorker>()
-   .setInputMerger(ArrayCreatingInputMerger::class)
-   .setConstraints(constraints)
-   .build()
-
 
         // TODO: Generate a OneTimeWorkRequest with the passed in duration, time unit, and data instance
 
