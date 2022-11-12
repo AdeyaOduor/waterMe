@@ -37,7 +37,10 @@ class PlantViewModel(application: Application): ViewModel() {
         .build()
 
         // TODO: Generate a OneTimeWorkRequest with the passed in duration, time unit, and data instance
-        
+        val oneTimeWorkRequest = oneTimeWorkRequestBuilder <waterReminderWorker>()
+        .setInitialDelay(duration, unit)
+        .setInputData(data)
+        .build()
 
         // TODO: Enqueue the request as a unique work request
     }
