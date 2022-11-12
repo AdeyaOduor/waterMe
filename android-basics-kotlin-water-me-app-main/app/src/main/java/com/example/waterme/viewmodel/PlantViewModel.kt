@@ -32,8 +32,12 @@ class PlantViewModel(application: Application): ViewModel() {
         plantName: String
     ) {
         // TODO: create a Data instance with the plantName passed to it
+        val Data = Data.Builder()
+        .putString(nameKey.plantName)
+        .build()
 
         // TODO: Generate a OneTimeWorkRequest with the passed in duration, time unit, and data instance
+        
 
         // TODO: Enqueue the request as a unique work request
     }
