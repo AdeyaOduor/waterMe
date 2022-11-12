@@ -43,6 +43,10 @@ class PlantViewModel(application: Application): ViewModel() {
         .build()
 
         // TODO: Enqueue the request as a unique work request
+        workManager.getInstance()enqueueUniqueWork(
+        plantName,
+        existingWorkPolicy.REPLACE, oneTimeWorkRequest
+        )
     }
 }
 
